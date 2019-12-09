@@ -6,7 +6,7 @@ class App_Model extends CI_Model {
 	{
 	  parent::__construct();
 	} 
-	
+
 	public function getLoginData($data)
 	{
 		$login['username'] = $data['username'];
@@ -17,12 +17,22 @@ class App_Model extends CI_Model {
 			foreach($cek->result() as $qad)
 			{	
 				$sess_data['logged_in'] = 'yesGetMeLoginBaby';		
-				$sess_data['id'] = $qad->user_id;
+				$sess_data['id'] = $qad->id;
 				$sess_data['username'] = $qad->username;
+				$sess_data['level'] = $qad->level;
 				$sess_data['ip_address'] = $this->input->ip_address();
 				$this->session->set_userdata($sess_data);
 			}
-			header('location:'.base_url().'');
+			if ($sess_data['level']=='Admin') {
+				redirect(base_url('index.php/home'));
+			}else if ($sess_data['level']=='Dosen') {
+				redirect(base_url('index.php/dosenku'));
+			}else if ($sess_data['level']=='Mahasiswa') {
+				redirect(base_url('index.php/mahasiswaku'));
+			}else{
+
+			}
+			
 		}
 		else
 		{

@@ -1,6 +1,6 @@
 <?php
 
-	class Template {
+	class dosen {
 		protected $_ci;
 		function __construct()
 		{
@@ -11,7 +11,7 @@
 		{
 	
 			$data['_content'] = $this->_ci->load->view($template, $data, true);
-			$this->_ci->load->view('template/template.php', $data);
+			$this->_ci->load->view('template/dosen.php', $data);
 		}
 	}
 ?>

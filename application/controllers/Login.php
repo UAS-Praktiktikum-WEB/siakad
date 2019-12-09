@@ -6,11 +6,13 @@ class Login extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
-        $this->load->library('template');
-		$this->load->model('app_model','app');
+		$this->load->library('template');
+		$this->load->helper('url');
+		$this->load->model('app_model','login');
     }
 	public function index()
 	{
+		$data['judul']='';
 		if ($this->session->userdata('logged_in') !=""){
 			$this->template->display('dashboard', $data);
 		}
@@ -21,18 +23,19 @@ class Login extends CI_Controller {
    
     public function login_app()
 	{			
-		
+		$data['judul']='';
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|matches[password]|md5');	
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');	
 		if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('v_login');
+			$this->load->view('v_login',$data);
+
 		}
 		else
 		{
 			$dt['username'] = $this->input->post('username');
-			$dt['password'] = md5($this->input->post('password'));
-			$this->app->getLoginData($dt);
+			$dt['password'] = $this->input->post('password');
+			$this->login->getLoginData($dt);
         }
     }
 
