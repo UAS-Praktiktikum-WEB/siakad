@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Siakad</b></a>
+    <a href="../../index2.html"><b>Siakad Mahasiswa Bersama</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
